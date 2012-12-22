@@ -48,9 +48,9 @@ Dokumentacja API biblioteki libmateweather.
 
 %prep
 %setup -q
-NOCONFIGURE=1 ./autogen.sh
 
 %build
+NOCONFIGURE=1 ./autogen.sh
 %configure \
 	--with-html-dir=%{_gtkdocdir} \
 	--enable-python \
