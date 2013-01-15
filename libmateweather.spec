@@ -97,10 +97,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libmateweather.so.*.*.*
 %ghost %{_libdir}/libmateweather.so.1
 
-# XXX package into theme package?
-%dir %{_iconsdir}/mate/scalable
-%dir %{_iconsdir}/mate/scalable/status
-
 # python
 %dir %{py_sitedir}/mateweather
 %{py_sitedir}/mateweather/*.py[co]
