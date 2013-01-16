@@ -53,6 +53,7 @@ Dokumentacja API biblioteki libmateweather.
 %build
 NOCONFIGURE=1 ./autogen.sh
 %configure \
+	--with-zoneinfo-dir=%{_datadir}/zoneinfo \
 	--with-html-dir=%{_gtkdocdir} \
 	--enable-python \
 	--disable-static
