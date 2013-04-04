@@ -1,11 +1,11 @@
 Summary:	Libraries to allow MATE Desktop to display weather information
 Name:		libmateweather
-Version:	1.5.1
+Version:	1.6.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Libraries
-Source0:	http://pub.mate-desktop.org/releases/1.5/%{name}-%{version}.tar.xz
-# Source0-md5:	c5cda1770a40f041595d46621e041038
+Source0:	http://pub.mate-desktop.org/releases/1.6/%{name}-%{version}.tar.xz
+# Source0-md5:	8c6fc4c137d4bb3b70b7294db85a45cb
 URL:		http://wiki.mate-desktop.org/libmateweather
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.11.0
@@ -13,8 +13,6 @@ BuildRequires:	intltool >= 0.40.3
 BuildRequires:	libsoup-devel >= 2.4.0
 BuildRequires:	libsoup-gnome-devel
 BuildRequires:	mate-common
-# XXX what's pld package?
-#BuildRequires:	python-gudev
 BuildRequires:	python-pygobject-devel
 BuildRequires:	python-pygtk-devel
 BuildRequires:	rpm-pythonprov
