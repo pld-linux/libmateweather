@@ -1,11 +1,11 @@
 Summary:	Libraries to allow MATE Desktop to display weather information
 Name:		libmateweather
-Version:	1.6.0
+Version:	1.6.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Libraries
 Source0:	http://pub.mate-desktop.org/releases/1.6/%{name}-%{version}.tar.xz
-# Source0-md5:	8c6fc4c137d4bb3b70b7294db85a45cb
+# Source0-md5:	6fd7832e76755fd3d8880472f7698577
 URL:		http://wiki.mate-desktop.org/libmateweather
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.11.0
