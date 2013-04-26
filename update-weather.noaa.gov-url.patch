@@ -1,0 +1,26 @@
+From 70efd95dba479f9f8318c7d50877f2461434a28b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Elan=20Ruusam=C3=A4e?= <glen@delfi.ee>
+Date: Fri, 26 Apr 2013 21:43:19 +0300
+Subject: [PATCH] update weather.noaa.gov url
+
+it's because the .pl url used, redirects. lessen the hops
+---
+ libmateweather/weather-metar.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libmateweather/weather-metar.c b/libmateweather/weather-metar.c
+index 6dfcf9c..da71db5 100644
+--- a/libmateweather/weather-metar.c
++++ b/libmateweather/weather-metar.c
+@@ -550,7 +550,7 @@ metar_start_open (WeatherInfo *info)
+     }
+ 
+     msg = soup_form_request_new (
+-	"GET", "http://weather.noaa.gov/cgi-bin/mgetmetar.pl",
++	"GET", "http://weather.noaa.gov/mgetmetar.php",
+ 	"cccc", loc->code,
+ 	NULL);
+     soup_session_queue_message (info->session, msg, metar_finish, info);
+-- 
+1.8.2.1
+
