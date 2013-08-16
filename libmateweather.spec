@@ -1,12 +1,11 @@
 Summary:	Libraries to allow MATE Desktop to display weather information
 Name:		libmateweather
-Version:	1.6.1
-Release:	2
+Version:	1.6.2
+Release:	1
 License:	GPL v2+
 Group:		X11/Libraries
 Source0:	http://pub.mate-desktop.org/releases/1.6/%{name}-%{version}.tar.xz
-# Source0-md5:	6fd7832e76755fd3d8880472f7698577
-Patch0:		update-weather.noaa.gov-url.patch
+# Source0-md5:	881a398575c44e79e22b079e06f00cb1
 URL:		http://wiki.mate-desktop.org/libmateweather
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.11.0
@@ -23,11 +22,12 @@ Requires:	glib2 >= 1:2.26.0
 Requires:	gsettings-desktop-schemas
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
+Requires(post,postun):	/sbin/ldconfig
 Conflicts:	mate-applet-gweather < 1.6.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Libraries to allow MATE Desktop to display weather information
+Libraries to allow MATE Desktop to display weather information.
 
 %package devel
 Summary:	Development files for libmateweather
@@ -51,18 +51,16 @@ Dokumentacja API biblioteki libmateweather.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
-NOCONFIGURE=1 ./autogen.sh
 %configure \
 	--with-zoneinfo-dir=%{_datadir}/zoneinfo \
 	--with-html-dir=%{_gtkdocdir} \
 	--enable-python \
+	--disable-silent-rules \
 	--disable-static
 
-%{__make} \
-	V=1
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
