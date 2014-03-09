@@ -1,20 +1,22 @@
 Summary:	Library to allow MATE Desktop to display weather information
 Summary(pl.UTF-8):	Biblioteka umożliwiająca wyświetlanie informacji pogodowych w środowisku MATE Desktop
 Name:		libmateweather
-Version:	1.6.2
-Release:	2
+Version:	1.8.0
+Release:	1
 License:	GPL v2+
 Group:		X11/Libraries
-Source0:	http://pub.mate-desktop.org/releases/1.6/%{name}-%{version}.tar.xz
-# Source0-md5:	881a398575c44e79e22b079e06f00cb1
+Source0:	http://pub.mate-desktop.org/releases/1.8/%{name}-%{version}.tar.xz
+# Source0-md5:	f11f7f3c6ae72e58b54931cb09bb76a7
 URL:		http://wiki.mate-desktop.org/libmateweather
+BuildRequires:	autoconf >= 2.59
+BuildRequires:	automake >= 1:1.9
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.26.0
 BuildRequires:	gtk+2-devel >= 2:2.11.0
 BuildRequires:	gtk-doc >= 1.9
 BuildRequires:	intltool >= 0.40.3
-BuildRequires:	libsoup-devel >= 2.4.0
-BuildRequires:	libsoup-gnome-devel >= 2.4.0
+BuildRequires:	libsoup-devel >= 2.34.0
+BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.0
 BuildRequires:	mate-common
 BuildRequires:	pkgconfig >= 1:0.19
@@ -90,6 +92,11 @@ Wiązanie Pythona do biblioteki libmateweather.
 %setup -q
 
 %build
+%{__libtoolize}
+%{__aclocal} -I m4
+%{__autoconf}
+%{__autoheader}
+%{__automake}
 %configure \
 	--with-html-dir=%{_gtkdocdir} \
 	--with-zoneinfo-dir=%{_datadir}/zoneinfo \
@@ -106,6 +113,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libmateweather.la
 %{__rm} $RPM_BUILD_ROOT%{py_sitedir}/mateweather/*/mateweather.la
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/cmn
 
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
@@ -131,7 +139,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog MAINTAINERS NEWS README
+%doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_libdir}/libmateweather.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libmateweather.so.1
 %{_datadir}/libmateweather
