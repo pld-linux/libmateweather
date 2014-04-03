@@ -2,7 +2,7 @@ Summary:	Library to allow MATE Desktop to display weather information
 Summary(pl.UTF-8):	Biblioteka umożliwiająca wyświetlanie informacji pogodowych w środowisku MATE Desktop
 Name:		libmateweather
 Version:	1.8.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		X11/Libraries
 Source0:	http://pub.mate-desktop.org/releases/1.8/%{name}-%{version}.tar.xz
@@ -43,8 +43,7 @@ information. It's a fork of libgweather.
 
 %description -l pl.UTF-8
 libmateweather to biblioteka umożliwiająca wyświetlanie informacji
-pogodowych w środowisku MATE Desktop. Jest odgałęzieniem
-libgweather.
+pogodowych w środowisku MATE Desktop. Jest odgałęzieniem libgweather.
 
 %package devel
 Summary:	Development files for libmateweather
@@ -67,6 +66,9 @@ Summary:	libmateweather API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki libmateweather
 Group:		Documentation
 Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 libmateweather API documentation.
