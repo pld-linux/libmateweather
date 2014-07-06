@@ -1,3 +1,11 @@
+#
+# Conditional build:
+%bcond_with	gtk3	# use GTK+ 3.x instead of 2.x
+%bcond_without	python	# Python bindings (GTK+ 2.x only)
+#
+%if %{with gtk3}
+%undefine	with_python
+%endif
 Summary:	Library to allow MATE Desktop to display weather information
 Summary(pl.UTF-8):	Biblioteka umożliwiająca wyświetlanie informacji pogodowych w środowisku MATE Desktop
 Name:		libmateweather
@@ -12,7 +20,8 @@ BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.26.0
-BuildRequires:	gtk+2-devel >= 2:2.11.0
+%{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.11.0}
+%{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.0.0}
 BuildRequires:	gtk-doc >= 1.9
 BuildRequires:	intltool >= 0.40.3
 BuildRequires:	libsoup-devel >= 2.34.0
@@ -20,9 +29,11 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.0
 BuildRequires:	mate-common
 BuildRequires:	pkgconfig >= 1:0.19
+%if %{with python}
 BuildRequires:	python-devel >= 2
 BuildRequires:	python-pygobject-devel >= 2.0
 BuildRequires:	python-pygtk-devel >= 2:2.0
+%endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	tar >= 1:1.22
@@ -30,7 +41,8 @@ BuildRequires:	xz
 Requires(post,postun):	/sbin/ldconfig
 Requires:	glib2 >= 1:2.26.0
 Requires:	gsettings-desktop-schemas
-Requires:	gtk+2 >= 2:2.11.0
+%{!?with_gtk3:Requires:	gtk+2 >= 2:2.11.0}
+%{?with_gtk3:Requires:	gtk+3 >= 3.0.0}
 Requires:	gtk-update-icon-cache
 Requires:	hicolor-icon-theme
 Requires:	libxml2 >= 1:2.6.0
@@ -51,7 +63,8 @@ Summary(pl.UTF-8):	Pliki programistyczne biblioteki libmateweather
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.26.0
-Requires:	gtk+2-devel >= 2:2.11.0
+%{!?with_gtk3:Requires:	gtk+2-devel >= 2:2.11.0}
+%{?with_gtk3:Requires:	gtk+3-devel >= 3.0.0}
 Requires:	libsoup-devel >= 2.4.0
 Requires:	libxml2-devel >= 1:2.6.0
 
@@ -100,9 +113,10 @@ Wiązanie Pythona do biblioteki libmateweather.
 %{__autoheader}
 %{__automake}
 %configure \
+	%{?with_gtk3:--with-gtk=3.0} \
 	--with-html-dir=%{_gtkdocdir} \
 	--with-zoneinfo-dir=%{_datadir}/zoneinfo \
-	--enable-python \
+	%{?with_python:--enable-python} \
 	--disable-silent-rules \
 	--disable-static
 
@@ -115,11 +129,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libmateweather.la
 %{__rm} $RPM_BUILD_ROOT%{py_sitedir}/mateweather/*/mateweather.la
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/cmn
 
+%if %{with python}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_postclean
+%endif
 
 # outdated copy of es
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/es_ES
@@ -159,6 +174,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_gtkdocdir}/libmateweather
 
+%if %{with python}
 %files -n python-mateweather
 %defattr(644,root,root,755)
 %dir %{py_sitedir}/mateweather
@@ -166,3 +182,4 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py_sitedir}/mateweather/I_KNOW_THIS_IS_UNSTABLE
 %{py_sitedir}/mateweather/I_KNOW_THIS_IS_UNSTABLE/*.py[co]
 %attr(755,root,root) %{py_sitedir}/mateweather/I_KNOW_THIS_IS_UNSTABLE/mateweather.so
+%endif
