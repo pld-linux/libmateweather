@@ -44,8 +44,8 @@ Requires:	gsettings-desktop-schemas
 %{!?with_gtk3:Requires:	gtk+2 >= 2:2.11.0}
 %{?with_gtk3:Requires:	gtk+3 >= 3.0.0}
 Requires:	gtk-update-icon-cache
-Requires:	hicolor-icon-theme
 Requires:	libxml2 >= 1:2.6.0
+Requires:	mate-icon-theme
 Conflicts:	mate-applet-gweather < 1.6.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -146,12 +146,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/ldconfig
-%update_icon_cache hicolor
+%update_icon_cache mate
 %glib_compile_schemas
 
 %postun
 /sbin/ldconfig
-%update_icon_cache hicolor
+%update_icon_cache mate
 %glib_compile_schemas
 
 %files -f %{name}.lang
