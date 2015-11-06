@@ -22,10 +22,10 @@ BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.36.0
 %{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.24.0}
 %{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.0.0}
-BuildRequires:	gtk-doc >= 1.9
+BuildRequires:	gtk-doc >= 1.11
 BuildRequires:	intltool >= 0.50.1
 BuildRequires:	libsoup-devel >= 2.34.0
-BuildRequires:	libtool
+BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.6.0
 BuildRequires:	mate-common
 BuildRequires:	pkgconfig >= 1:0.19
