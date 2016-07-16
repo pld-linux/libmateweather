@@ -39,11 +39,12 @@ BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 Requires(post,postun):	/sbin/ldconfig
+Requires(post,postun):	gtk-update-icon-cache
 Requires:	glib2 >= 1:2.36.0
 Requires:	gsettings-desktop-schemas
 %{!?with_gtk3:Requires:	gtk+2 >= 2:2.24.0}
 %{?with_gtk3:Requires:	gtk+3 >= 3.0.0}
-Requires:	gtk-update-icon-cache
+Requires:	libsoup >= 2.34.0
 Requires:	libxml2 >= 1:2.6.0
 Requires:	mate-icon-theme
 Conflicts:	mate-applet-gweather < 1.6.1
@@ -65,7 +66,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.36.0
 %{!?with_gtk3:Requires:	gtk+2-devel >= 2:2.24.0}
 %{?with_gtk3:Requires:	gtk+3-devel >= 3.0.0}
-Requires:	libsoup-devel >= 2.4.0
+Requires:	libsoup-devel >= 2.34.0
 Requires:	libxml2-devel >= 1:2.6.0
 
 %description devel
