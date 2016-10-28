@@ -9,12 +9,12 @@
 Summary:	Library to allow MATE Desktop to display weather information
 Summary(pl.UTF-8):	Biblioteka umożliwiająca wyświetlanie informacji pogodowych w środowisku MATE Desktop
 Name:		libmateweather
-Version:	1.16.0
+Version:	1.16.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Libraries
 Source0:	http://pub.mate-desktop.org/releases/1.16/%{name}-%{version}.tar.xz
-# Source0-md5:	bee27d7654371d7a562945717f1d9047
+# Source0-md5:	6ec50c34dbfb49695421a291ca932d18
 URL:		http://wiki.mate-desktop.org/libmateweather
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
@@ -37,6 +37,7 @@ BuildRequires:	python-pygtk-devel >= 2:2.0
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	tzdata-zoneinfo >= 2016g
 BuildRequires:	xz
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	gtk-update-icon-cache
@@ -47,6 +48,7 @@ Requires:	gsettings-desktop-schemas
 Requires:	libsoup >= 2.34.0
 Requires:	libxml2 >= 1:2.6.0
 Requires:	mate-icon-theme
+Requires:	tzdata-zoneinfo >= 2016g
 Conflicts:	mate-applet-gweather < 1.6.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
