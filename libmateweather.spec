@@ -1,27 +1,18 @@
-#
-# Conditional build:
-%bcond_with	gtk3	# use GTK+ 3.x instead of 2.x
-%bcond_without	python	# Python bindings (GTK+ 2.x only)
-#
-%if %{with gtk3}
-%undefine	with_python
-%endif
 Summary:	Library to allow MATE Desktop to display weather information
 Summary(pl.UTF-8):	Biblioteka umożliwiająca wyświetlanie informacji pogodowych w środowisku MATE Desktop
 Name:		libmateweather
-Version:	1.16.1
+Version:	1.18.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Libraries
-Source0:	http://pub.mate-desktop.org/releases/1.16/%{name}-%{version}.tar.xz
-# Source0-md5:	6ec50c34dbfb49695421a291ca932d18
+Source0:	http://pub.mate-desktop.org/releases/1.18/%{name}-%{version}.tar.xz
+# Source0-md5:	2f3e6493a457438e08b6034fe9ad05dc
 URL:		http://wiki.mate-desktop.org/libmateweather
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.36.0
-%{!?with_gtk3:BuildRequires:	gtk+2-devel >= 2:2.24.0}
-%{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.0.0}
+BuildRequires:	gtk+3-devel >= 3.14
 BuildRequires:	gtk-doc >= 1.11
 BuildRequires:	intltool >= 0.50.1
 BuildRequires:	libsoup-devel >= 2.34.0
@@ -29,12 +20,6 @@ BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.6.0
 BuildRequires:	mate-common
 BuildRequires:	pkgconfig >= 1:0.19
-%if %{with python}
-BuildRequires:	python-devel >= 2
-BuildRequires:	python-pygobject-devel >= 2.0
-BuildRequires:	python-pygtk-devel >= 2:2.0
-%endif
-BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	tzdata-zoneinfo >= 2016g
@@ -43,12 +28,12 @@ Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	glib2 >= 1:2.36.0
 Requires:	gsettings-desktop-schemas
-%{!?with_gtk3:Requires:	gtk+2 >= 2:2.24.0}
-%{?with_gtk3:Requires:	gtk+3 >= 3.0.0}
+Requires:	gtk+3 >= 3.14
 Requires:	libsoup >= 2.34.0
 Requires:	libxml2 >= 1:2.6.0
 Requires:	mate-icon-theme
 Requires:	tzdata-zoneinfo >= 2016g
+Obsoletes:	python-mateweather
 Conflicts:	mate-applet-gweather < 1.6.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -66,8 +51,7 @@ Summary(pl.UTF-8):	Pliki programistyczne biblioteki libmateweather
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.36.0
-%{!?with_gtk3:Requires:	gtk+2-devel >= 2:2.24.0}
-%{?with_gtk3:Requires:	gtk+3-devel >= 3.0.0}
+Requires:	gtk+3-devel >= 3.14
 Requires:	libsoup-devel >= 2.34.0
 Requires:	libxml2-devel >= 1:2.6.0
 
@@ -92,20 +76,6 @@ libmateweather API documentation.
 %description apidocs -l pl.UTF-8
 Dokumentacja API biblioteki libmateweather.
 
-%package -n python-mateweather
-Summary:	Python binding for libmateweather library
-Summary(pl.UTF-8):	Wiązanie Pythona do biblioteki libmateweather
-Group:		Libraries/Python
-Requires:	%{name} = %{version}-%{release}
-Requires:	python-pygobject >= 2.0
-Requires:	python-pygtk-gtk >= 2:2.0
-
-%description -n python-mateweather
-Python binding for libmateweather library.
-
-%description -n python-mateweather -l pl.UTF-8
-Wiązanie Pythona do biblioteki libmateweather.
-
 %prep
 %setup -q
 
@@ -116,10 +86,8 @@ Wiązanie Pythona do biblioteki libmateweather.
 %{__autoheader}
 %{__automake}
 %configure \
-	%{?with_gtk3:--with-gtk=3.0} \
 	--with-html-dir=%{_gtkdocdir} \
 	--with-zoneinfo-dir=%{_datadir}/zoneinfo \
-	%{?with_python:--enable-python} \
 	--disable-silent-rules \
 	--disable-static
 
@@ -131,7 +99,6 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/libmateweather.la
-%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/mateweather/*/mateweather.la
 
 %if %{with python}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
@@ -141,7 +108,7 @@ rm -rf $RPM_BUILD_ROOT
 
 # outdated copy of es
 %{__rm} -r $RPM_BUILD_ROOT%{_localedir}/es_ES
-%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{frp,jv}
+%{__rm} -r $RPM_BUILD_ROOT%{_localedir}/{frp,ku_IQ,jv}
 
 %find_lang %{name}
 
@@ -177,13 +144,3 @@ rm -rf $RPM_BUILD_ROOT
 %files apidocs
 %defattr(644,root,root,755)
 %{_gtkdocdir}/libmateweather
-
-%if %{with python}
-%files -n python-mateweather
-%defattr(644,root,root,755)
-%dir %{py_sitedir}/mateweather
-%{py_sitedir}/mateweather/*.py[co]
-%dir %{py_sitedir}/mateweather/I_KNOW_THIS_IS_UNSTABLE
-%{py_sitedir}/mateweather/I_KNOW_THIS_IS_UNSTABLE/*.py[co]
-%attr(755,root,root) %{py_sitedir}/mateweather/I_KNOW_THIS_IS_UNSTABLE/mateweather.so
-%endif
