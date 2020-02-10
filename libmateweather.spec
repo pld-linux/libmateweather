@@ -1,21 +1,20 @@
 Summary:	Library to allow MATE Desktop to display weather information
 Summary(pl.UTF-8):	Biblioteka umożliwiająca wyświetlanie informacji pogodowych w środowisku MATE Desktop
 Name:		libmateweather
-Version:	1.22.1
+Version:	1.24.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Libraries
-Source0:	http://pub.mate-desktop.org/releases/1.22/%{name}-%{version}.tar.xz
-# Source0-md5:	614d7b06bcbc42e3a93f56abd589398d
+Source0:	http://pub.mate-desktop.org/releases/1.24/%{name}-%{version}.tar.xz
+# Source0-md5:	2490df1484f64272fc99c5472c622f71
 URL:		http://wiki.mate-desktop.org/libmateweather
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
-BuildRequires:	gettext-tools
+BuildRequires:	gettext-tools >= 0.19.8
 BuildRequires:	glib2-devel >= 1:2.50.0
 BuildRequires:	gtk+3-devel >= 3.22
 BuildRequires:	gtk-doc >= 1.11
-BuildRequires:	intltool >= 0.50.1
-BuildRequires:	libsoup-devel >= 2.34.0
+BuildRequires:	libsoup-devel >= 2.54.0
 BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.6.0
 BuildRequires:	mate-common
@@ -29,7 +28,7 @@ Requires(post,postun):	gtk-update-icon-cache
 Requires:	glib2 >= 1:2.50.0
 Requires:	gsettings-desktop-schemas
 Requires:	gtk+3 >= 3.22
-Requires:	libsoup >= 2.34.0
+Requires:	libsoup >= 2.54.0
 Requires:	libxml2 >= 1:2.6.0
 Requires:	mate-icon-theme
 Requires:	tzdata-zoneinfo >= 2016g
@@ -52,7 +51,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	glib2-devel >= 1:2.50.0
 Requires:	gtk+3-devel >= 3.22
-Requires:	libsoup-devel >= 2.34.0
+Requires:	libsoup-devel >= 2.54.0
 Requires:	libxml2-devel >= 1:2.6.0
 
 %description devel
