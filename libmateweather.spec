@@ -1,12 +1,12 @@
 Summary:	Library to allow MATE Desktop to display weather information
 Summary(pl.UTF-8):	Biblioteka umożliwiająca wyświetlanie informacji pogodowych w środowisku MATE Desktop
 Name:		libmateweather
-Version:	1.24.0
+Version:	1.24.1
 Release:	1
 License:	GPL v2+
 Group:		X11/Libraries
 Source0:	http://pub.mate-desktop.org/releases/1.24/%{name}-%{version}.tar.xz
-# Source0-md5:	2490df1484f64272fc99c5472c622f71
+# Source0-md5:	51189066046d43d9ba1ee09be339248a
 URL:		http://wiki.mate-desktop.org/libmateweather
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
