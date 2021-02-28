@@ -65,9 +65,7 @@ Summary:	libmateweather API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki libmateweather
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "5"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 libmateweather API documentation.
