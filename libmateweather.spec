@@ -1,17 +1,17 @@
 Summary:	Library to allow MATE Desktop to display weather information
 Summary(pl.UTF-8):	Biblioteka umożliwiająca wyświetlanie informacji pogodowych w środowisku MATE Desktop
 Name:		libmateweather
-Version:	1.24.1
+Version:	1.26.0
 Release:	1
 License:	GPL v2+
 Group:		X11/Libraries
-Source0:	http://pub.mate-desktop.org/releases/1.24/%{name}-%{version}.tar.xz
-# Source0-md5:	51189066046d43d9ba1ee09be339248a
+Source0:	https://pub.mate-desktop.org/releases/1.26/%{name}-%{version}.tar.xz
+# Source0-md5:	5071750f05fe60a1ee7691f24216948a
 URL:		http://wiki.mate-desktop.org/libmateweather
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	gettext-tools >= 0.19.8
-BuildRequires:	glib2-devel >= 1:2.50.0
+BuildRequires:	glib2-devel >= 1:2.56.0
 BuildRequires:	gtk+3-devel >= 3.22
 BuildRequires:	gtk-doc >= 1.11
 BuildRequires:	libsoup-devel >= 2.54.0
@@ -25,7 +25,7 @@ BuildRequires:	tzdata-zoneinfo >= 2016g
 BuildRequires:	xz
 Requires(post,postun):	/sbin/ldconfig
 Requires(post,postun):	gtk-update-icon-cache
-Requires:	glib2 >= 1:2.50.0
+Requires:	glib2 >= 1:2.56.0
 Requires:	gsettings-desktop-schemas
 Requires:	gtk+3 >= 3.22
 Requires:	libsoup >= 2.54.0
@@ -49,7 +49,7 @@ Summary:	Development files for libmateweather
 Summary(pl.UTF-8):	Pliki programistyczne biblioteki libmateweather
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.50.0
+Requires:	glib2-devel >= 1:2.56.0
 Requires:	gtk+3-devel >= 3.22
 Requires:	libsoup-devel >= 2.54.0
 Requires:	libxml2-devel >= 1:2.6.0
@@ -114,12 +114,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 /sbin/ldconfig
-%update_icon_cache mate
+%update_icon_cache hicolor
 %glib_compile_schemas
 
 %postun
 /sbin/ldconfig
-%update_icon_cache mate
+%update_icon_cache hicolor
 %glib_compile_schemas
 
 %files -f %{name}.lang
@@ -129,8 +129,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %ghost %{_libdir}/libmateweather.so.1
 %{_datadir}/libmateweather
 %{_datadir}/glib-2.0/schemas/org.mate.weather.gschema.xml
-%{_iconsdir}/mate/*x*/status/weather-*.png
-%{_iconsdir}/mate/scalable/status/weather-*.svg
+%{_iconsdir}/hicolor/*x*/status/weather-*.png
+%{_iconsdir}/hicolor/scalable/status/weather-*.svg
 
 %files devel
 %defattr(644,root,root,755)
