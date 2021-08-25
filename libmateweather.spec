@@ -7,7 +7,7 @@ License:	GPL v2+
 Group:		X11/Libraries
 Source0:	https://pub.mate-desktop.org/releases/1.26/%{name}-%{version}.tar.xz
 # Source0-md5:	5071750f05fe60a1ee7691f24216948a
-URL:		http://wiki.mate-desktop.org/libmateweather
+URL:		https://wiki.mate-desktop.org/mate-desktop/libraries/libmateweather/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	gettext-tools >= 0.19.8
@@ -32,7 +32,7 @@ Requires:	libsoup >= 2.54.0
 Requires:	libxml2 >= 1:2.6.0
 Requires:	mate-icon-theme
 Requires:	tzdata-zoneinfo >= 2016g
-Obsoletes:	python-mateweather
+Obsoletes:	python-mateweather < 1.18.0
 Conflicts:	mate-applet-gweather < 1.6.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
