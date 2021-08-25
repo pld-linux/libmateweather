@@ -19,6 +19,7 @@ BuildRequires:	libtool >= 2:2.2.6
 BuildRequires:	libxml2-devel >= 1:2.6.0
 BuildRequires:	mate-common
 BuildRequires:	pkgconfig >= 1:0.19
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	tzdata-zoneinfo >= 2016g
