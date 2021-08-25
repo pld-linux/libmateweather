@@ -29,9 +29,9 @@ Requires(post,postun):	gtk-update-icon-cache
 Requires:	glib2 >= 1:2.56.0
 Requires:	gsettings-desktop-schemas
 Requires:	gtk+3 >= 3.22
+Requires:	hicolor-icon-theme
 Requires:	libsoup >= 2.54.0
 Requires:	libxml2 >= 1:2.6.0
-Requires:	mate-icon-theme
 Requires:	tzdata-zoneinfo >= 2016g
 Obsoletes:	python-mateweather < 1.18.0
 Conflicts:	mate-applet-gweather < 1.6.1
